@@ -1,15 +1,26 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       th:replace="base::layout(~{::section})">
+<style>
+    .text-center{
+    padding:19%;
+    }
+</style>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>This is a home page</title>
 </head>
 <body>
-  <section>
-      <h1>This is home page</h1>
-      <h2>We are building spring boot project</h2>
+  <section class="smart d-flex justify-content-center align items-center">
+      <div class="text-center" style="padding: 19%;">
+          <h1 class="font-weight-bold"> Smart Contact Manager</h1>
+          <p>
+          Start Collecting your contacts in my smarter way. We provide very
+              efficient and smarter way of handling contacts.</p>
+          <button class="btn bg-primary btn-lg text-white">Get Start</button>
+      </div>
+
   </section>
 </body>
 </html>
