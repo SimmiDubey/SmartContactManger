@@ -5,12 +5,13 @@ import com.example.SmartContactManager.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class HomeController {
+
+    @Autowired
+    private UserRepository userRepository;
 
     @RequestMapping("/")
     public String home(Model model){
@@ -28,6 +29,34 @@ public class HomeController {
     @RequestMapping("/signup")
     public String signup(Model model){
         model.addAttribute("title","Register -Smart Contact manager");
+        model.addAttribute("user", new User());
+        return "signup";
+    }
+
+    @RequestMapping("/do_register")
+    public String registerUser(@ModelAttribute("user") User user,
+                               @RequestParam(value="agreement",defaultValue = "false")
+                               boolean agreement,Model model){
+        try {
+            if (!agreement) {
+                System.out.println("You have not agreed the terms and conditions");
+            }
+
+            user.setRole("ROLE_USER");
+            user.setEnabled(true);
+
+            System.out.println("Agreement" + agreement);
+            System.out.println("User" + user);
+
+            User result = this.userRepository.save(user);
+            model.addAttribute("user", result);
+        }catch(Exception e){
+            e.printStackTrace();
+            model.addAttribute("user",user);
+
+
+        }
+
         return "signup";
     }
 
