@@ -1,7 +1,9 @@
 package com.example.SmartContactManager.model;
 
 import jakarta.persistence.*;
-import org.apache.catalina.LifecycleState;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,14 +14,19 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @NotBlank(message = "Name field is required")
     private String name;
+    @NotBlank(message = "Please provide the valid email")
     @Column(unique = true)
     private String email;
+    @Size(min=6, message = "Password must be at least 4 character long")
     private String password;
     private  String role;
     private boolean enabled;
     private String imageUrl;
     @Column(length=500)
+    @Size(min = 10,message = "About text must be less than 10 characters")
     private String about;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user")
@@ -115,8 +122,6 @@ public class User {
                     ", contacts=" + contacts +
                     '}';
         }
-
-
 
 
     }
