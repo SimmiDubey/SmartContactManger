@@ -15,18 +15,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @NotBlank(message = "Name field is required")
+   // @NotBlank(message = "Name field is required")
     private String name;
-    @NotBlank(message = "Please provide the valid email")
-    @Column(unique = true)
+   // @NotBlank(message = "Please provide the valid email")
+   // @Column(unique = true)
     private String email;
-    @Size(min=6, message = "Password must be at least 4 character long")
+   // @Size(min=6, message = "Password must be at least 4 character long")
     private String password;
     private  String role;
     private boolean enabled;
     private String imageUrl;
-    @Column(length=500)
-    @Size(min = 10,message = "About text must be less than 10 characters")
+   // @Column(length=500)
+   // @Size(min = 0, max = 10, message = "About text must be less than 10 characters")
     private String about;
 
     @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.LAZY,mappedBy = "user")
@@ -94,6 +94,7 @@ public class User {
     }
 
     public void setAbout(String about) {
+
         this.about = about;
     }
 
