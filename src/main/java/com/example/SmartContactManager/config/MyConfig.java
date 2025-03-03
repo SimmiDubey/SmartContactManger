@@ -48,6 +48,10 @@ public class MyConfig {
                         .requestMatchers("/**").permitAll()
                 )
                 .formLogin()
+                .loginPage("/sign")
+                .loginProcessingUrl("/sign")
+                .defaultSuccessUrl("/user/index")
+
                 .and()
                 .csrf().disable();
 
